@@ -4,7 +4,13 @@ const cors = require('cors');
 const app = express();
 const port = 3001;
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["https://optimal-rubiks-cube-solver-api.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true
+  }
+));
 app.use(express.json());
 
 app.post('/api/solve', (req, res) => {
