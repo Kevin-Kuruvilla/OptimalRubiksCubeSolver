@@ -1,6 +1,5 @@
 {
-    "rewrites": [
-      { "source": "/api/solve", "destination": "/api/solve" }
-    ]
-  }
-  
+    "version": 2,
+    "builds": [{ "src": "./client/src/index.js", "use": "@vercel/node" }],
+    "routes": [{ "src": "/api/solve", "dest": "/api/solve" }]
+}
