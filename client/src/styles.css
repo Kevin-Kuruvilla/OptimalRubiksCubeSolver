@@ -1,0 +1,236 @@
+@import url('https://rsms.me/inter/inter.css');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #f0f0f0;
+  display: flex;
+}
+
+/* Add a class to style the div containing the canvas and buttons */
+.canvas-container {
+  flex: 1;
+  position: relative; /* Make the container a reference for absolute positioning */
+  height: 100vh;
+}
+
+/* Add some spacing between the buttons */
+.color-button-container {
+  position: absolute;
+  top: 63px; /* Position the buttons at the bottom */
+  left: 50%; /* Center the buttons horizontally */
+  transform: translateX(-50%); /* Adjust the horizontal position to center */
+  gap: 20px;
+  opacity: 0;
+  display: flex;
+  transition: all 0.15s ease; /* Add transition for smooth size change */
+}
+
+.show {
+  opacity: 1 !important;
+  transition: all 0.15s ease !important; /* Add transition for smooth size change */
+}
+
+/* Style the buttons */
+.color-button-container button {
+  border: none; /* Remove the border */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Make the buttons circular */
+
+  /* Add shadow below the buttons */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+
+  transition: all 0.2s ease; /* Add transition for smooth size change */
+}
+
+.color-button-container button:hover {
+  filter: brightness(80%);
+}
+
+.color-button-container button.selected {
+  transform: scale(1.2); /* Enlarge the button when selected */
+}
+
+.solve-button-container {
+  position: absolute;
+  bottom: 63px; /* Position the buttons at the bottom */
+  left: 50%; /* Center the buttons horizontally */
+  transform: translateX(-50%); /* Adjust the horizontal position to center */
+  transition: all 0.15s ease; /* Add transition for smooth size change */
+  opacity: 0;
+}
+
+.solve-button-container button {
+  /* Your button styles go here */
+  font-size: 5em;
+  font-weight: 400;
+  line-height: 0.7em;
+  letter-spacing: -2px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter var', sans-serif;
+}
+
+.solve-button-container button:hover {
+  color: #272730; /* Change the background color on hover */
+}
+
+/* Dot styles */
+.dotstyle ul {
+	position: relative;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+.dotstyle li {
+	position: relative;
+	display: block;
+	float: left;
+	margin: 0 16px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	transform: translateX(-175%); /* Center the text block horizontally */
+}
+
+.dotstyle li div {
+	width: 100%;
+	height: 100%;
+	outline: none;
+	border-radius: 50%;
+	background-color: black;
+	cursor: pointer;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white; /* Add text color if needed */
+	font-size: 12px; /* Adjust font size as needed */
+  }
+
+.dotstyle li div .dot-text {
+	position: absolute;
+	bottom: 100%; /* This will position the text above the dot */
+	left: 50%; /* Start at the horizontal center of the dot */
+	transform: translateX(-50%); /* Center the text block horizontally */
+	white-space: nowrap; /* Keep the text in a single line */
+	color: black; /* Adjust text color as needed */
+	font-size: 12px; /* Adjust font size as needed */
+	margin-bottom: 5px; /* Adjust space between the text and the dot */
+}
+
+.dotstyle-scaleup li div {
+	-webkit-transition: -webkit-transform 0.3s ease, background-color 0.3s ease;
+	transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.dotstyle-scaleup li.current div {
+	background-color: #272730;
+	-webkit-transform: scale(1.5);
+	transform: scale(1.5);
+}
+
+/* Dot arrow */
+.nav-circlepop div {
+	margin: 0 30px;
+	width: 50px;
+	height: 50px;
+}
+
+.nav-circlepop .icon-wrap {
+	position: relative;
+	display: block;
+	margin: 10% 0 0 10%;
+	width: 80%;
+	height: 80%;
+}
+
+.nav-circlepop div.next .icon-wrap {
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.nav-circlepop .icon-wrap::before,
+.nav-circlepop .icon-wrap::after {
+	position: absolute;
+	left: 25%;
+	width: 6px;
+	height: 50%;
+	background: black;
+	content: '';
+	-webkit-transition: -webkit-transform 0.3s, background-color 0.3s;
+	transition: transform 0.3s, background-color 0.3s;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.nav-circlepop .icon-wrap::before {
+	-webkit-transform: translateX(-50%) rotate(30deg);
+	transform: translateX(-50%) rotate(30deg);
+	-webkit-transform-origin: 0 100%;
+	transform-origin: 0 100%;
+}
+
+.nav-circlepop .icon-wrap::after {
+	top: 50%;
+	-webkit-transform: translateX(-50%) rotate(-30deg);
+	transform: translateX(-50%) rotate(-30deg);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+}
+
+.nav-circlepop div:hover::before {
+	opacity: 1;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.nav-circlepop div:hover .icon-wrap::before,
+.nav-circlepop div:hover .icon-wrap::after {
+	background: #272730;
+}
+
+.nav-circlepop div:hover .icon-wrap::before {
+	-webkit-transform: translateX(-50%) rotate(45deg);
+	transform: translateX(-50%) rotate(45deg);
+}
+
+.nav-circlepop div:hover .icon-wrap::after {
+	-webkit-transform: translateX(-50%) rotate(-45deg);
+	transform: translateX(-50%) rotate(-45deg);
+}
+
+/* Align dots with arrows */
+.solve-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  flex-direction: column;
+}
+
+.nav-circlepop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-circlepop .prev,
+.nav-circlepop .next {
+  margin: 0 5px; 
+}
