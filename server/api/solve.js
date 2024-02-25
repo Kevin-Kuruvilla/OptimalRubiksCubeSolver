@@ -1,8 +1,8 @@
+// /api/solve.js
 const express = require('express');
-const spawn = require('child_process').spawn;
+const { spawn } = require('child_process');
 const cors = require('cors');
 const app = express();
-const port = 3001;
 
 app.use(cors({
   origin: ["https://optimal-rubiks-cube-solver.vercel.app"],
@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.json("Hello");
-})
+});
 
 app.post('/api/solve', (req, res) => {
   const python = spawn('python', ['./server/app.py', JSON.stringify(req.body)]);
@@ -23,10 +23,10 @@ app.post('/api/solve', (req, res) => {
   });
 
   python.on('close', (code) => {
-    if (code == 0) {
-      res.json({solution : outputData})
+    if (code === 0) {
+      res.json({ solution: outputData });
     } else {
-      res.status(500).send('Error executing Python script')
+      res.status(500).send('Error executing Python script');
     }
   });
 });
