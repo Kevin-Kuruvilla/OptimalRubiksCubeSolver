@@ -35,6 +35,10 @@ app.post('/api/solve', (req, res) => {
       res.status(500).send('Error executing Python script');
     }
   });
+
+  python.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+  });
 });
 
 module.exports = app;
