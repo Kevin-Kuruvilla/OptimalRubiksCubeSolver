@@ -106,6 +106,17 @@ def list_of_states_to_json_object(list_of_cube_states, moves):
     return grouped_json_object
 
 class handler(BaseHTTPRequestHandler):
+    def _set_headers(self):
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', 'https://optimal-rubiks-cube-solver.vercel.app')
+        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+
+    def do_OPTIONS(self):
+        self._set_headers()
+
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
@@ -118,9 +129,7 @@ class handler(BaseHTTPRequestHandler):
         output = list_of_states_to_json_object(path, moves)
         json_output = json.dumps(output, ensure_ascii=False)
 
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
+        self._set_headers()  # Set appropriate headers before sending the response
         self.wfile.write(json_output.encode('utf-8'))
 
 if __name__ == '__main__':
