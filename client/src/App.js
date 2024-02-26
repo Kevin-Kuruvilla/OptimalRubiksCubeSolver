@@ -195,6 +195,7 @@ export default function App() {
       return response.json()
     })
     .then(data => {
+      console.log(data)
       state.solutionPath = JSON.parse(data.solution)
       setCurrentIndex(0)
       navigateToState(0)
