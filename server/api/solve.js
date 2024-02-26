@@ -4,10 +4,16 @@ const { spawn } = require('child_process');
 const cors = require('cors');
 const app = express();
 
+// Configure CORS to accept requests from your client domain and methods
 app.use(cors({
-  origin: ["https://optimal-rubiks-cube-solver.vercel.app"],
-  methods: ["POST"]
+  origin: "https://optimal-rubiks-cube-solver.vercel.app",
+  methods: ["POST", "OPTIONS"], // Ensure OPTIONS is included
+  allowedHeaders: ["Content-Type"] // You can specify headers
 }));
+
+// Enable pre-flight request for POST request
+app.options('/api/solve', cors()); // Enable CORS for pre-flight
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
