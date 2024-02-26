@@ -181,7 +181,7 @@ export default function App() {
 
     console.log(JSON.stringify(scrambleState))
 
-    fetch('http://localhost:3001/api/solve', {
+    fetch('https://optimal-rubiks-cube-solver-api.vercel.app/api/solve', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
