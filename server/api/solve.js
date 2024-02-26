@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/solve', (req, res) => {
-  const python = spawn('python', ['./server/app.py', JSON.stringify(req.body)]);
+  const python = spawn('python', ['./app.py', JSON.stringify(req.body)]);
 
   let outputData = '';
   python.stdout.on('data', (data) => {
