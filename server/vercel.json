@@ -1,6 +1,15 @@
 {
-"version": 2,
+    "version": 2,
     "routes": [
-        { "src": "/api/solve", "dest": "/api/solve" }
+      {
+        "src": "/api/solve",
+        "methods": ["POST"],
+        "headers": {
+          "Access-Control-Allow-Origin": "https://optimal-rubiks-cube-solver.vercel.app",
+          "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
+      }
     ]
-}
+  }
+  
