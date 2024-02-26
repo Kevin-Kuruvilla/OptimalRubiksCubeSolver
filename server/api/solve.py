@@ -1,6 +1,6 @@
-import sys
+from http.server import BaseHTTPRequestHandler
 import json
-from server.api.rubiks_cube import RubiksCube
+from rubiks_cube import RubiksCube
 import numpy as np
 
 def json_object_to_cube_state(json_object):
@@ -105,13 +105,26 @@ def list_of_states_to_json_object(list_of_cube_states, moves):
     
     return grouped_json_object
 
+class handler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        json_object = json.loads(post_data.decode('utf-8'))
+        
+        scramble = json_object_to_cube_state(json_object)
+        scramble = np.array(scramble)
+        cube = RubiksCube(scramble)
+        path, moves = cube.solve_cube()
+        output = list_of_states_to_json_object(path, moves)
+        json_output = json.dumps(output, ensure_ascii=False)
 
-if __name__ == "__main__":
-    json_object = json.loads(sys.argv[1])
-    scramble = json_object_to_cube_state(json_object)
-    scramble = np.array(scramble)
-    cube = RubiksCube(scramble)
-    path, moves = cube.solve_cube()
-    output = list_of_states_to_json_object(path, moves)
-    json_output = json.dumps(output, ensure_ascii=False)
-    print(json_output)
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json_output.encode('utf-8'))
+
+if __name__ == '__main__':
+    from http.server import HTTPServer
+    server_address = ('', 8000)
+    httpd = HTTPServer(server_address, handler)
+    httpd.serve_forever()
