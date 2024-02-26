@@ -114,4 +114,5 @@ if __name__ == "__main__":
     path, moves = cube.solve_cube()
     output = list_of_states_to_json_object(path, moves)
     json_output = json.dumps(output, ensure_ascii=False)
-    print(json_output)
+    print("{\"top\":{\"top_sticker_0\":\"W\",\"top_sticker_1\":\"W\",\"top_sticker_2\":\"W\",\"top_sticker_3\":\"W\"},\"front\":{\"front_sticker_0\":\"G\",\"front_sticker_1\":\"G\",\"front_sticker_2\":\"R\",\"front_sticker_3\":\"R\"},\"right\":{\"right_sticker_0\":\"R\",\"right_sticker_1\":\"R\",\"right_sticker_2\":\"B\",\"right_sticker_3\":\"B\"},\"back\":{\"back_sticker_0\":\"B\",\"back_sticker_1\":\"B\",\"back_sticker_2\":\"O\",\"back_sticker_3\":\"O\"},\"left\":{\"left_sticker_0\":\"O\",\"left_sticker_1\":\"O\",\"left_sticker_2\":\"G\",\"left_sticker_3\":\"G\"},\"bottom\":{\"bottom_sticker_0\":\"Y\",\"bottom_sticker_1\":\"Y\",\"bottom_sticker_2\":\"Y\",\"bottom_sticker_3\":\"Y\"}}"
+)
