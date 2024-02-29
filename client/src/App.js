@@ -336,6 +336,20 @@ export default function App() {
           </div>
         </>
       )}
+      
+      <footer>
+        <div className="footer-content">
+          <div className="name">Kevin Kuruvilla</div>
+          <div className="icons">
+            <a href="https://linkedin.com/in/kuruvilla-kevin" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/kevin-kuruvilla" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
